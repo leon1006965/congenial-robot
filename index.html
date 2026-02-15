@@ -347,10 +347,10 @@
         <img src="https://yt3.googleusercontent.com/3v1udmdlcCEtP13ti_wDRuS8Mi0X9Fo7Wb17f0ewh2H58nlgof3waSp47u_1mAolRC7XHkNbViM=s72-c-k-c0x00ffffff-no-rj" alt="Leon">
     </div>
     <div class="server-icon" data-server="pirated">
-        <img src="https://cdn.discordapp.com/attachments/1472331197865656504/1472335387002273933/Pirated301.png?ex=699232ae&is=6990e12e&hm=8b50f0bdeae7d3050451c2353e676354363f515ace8f9cad6357ed13adffeaf0" alt="Pirated301">
+        <img src="https://cdn.discordapp.com/attachments/1472331197865656504/1472335387002273933/Pirated301.png" alt="Pirated301">
     </div>
     <div class="server-icon" data-server="jullian">
-        <img src="https://cdn.discordapp.com/attachments/1372285420150460509/1471585740923207793/8803DC9B-AFA7-42A0-BD48-907C906E766F.png?ex=69921b85&is=6990ca05&hm=da34c48e080953396618f7d74d479f3b0afbb5375880a696b2ec63e178d70b26&" alt="Jullian">
+        <img src="https://cdn.discordapp.com/attachments/1372285420150460509/1471585740923207793/8803DC9B-AFA7-42A0-BD48-907C906E766F.png" alt="Jullian">
     </div>
     <div class="server-separator"></div>
 </div>
@@ -358,22 +358,16 @@
 <div class="main">
     <!-- CHANNELS -->
     <div class="channels">
-        <div class="server-header" id="serverHeader">
-            <!-- Filled by JS -->
-        </div>
-        <div class="channel-list" id="channelList">
-            <!-- Channels -->
-        </div>
+        <div class="server-header" id="serverHeader"></div>
+        <div class="channel-list" id="channelList"></div>
     </div>
 
     <!-- CHAT -->
     <div class="chat">
-        <div class="chat-header" id="chatHeader">
+        <div class="chat-header">
             <span class="hash">#</span><span id="chatChannelName">general</span>
         </div>
-        <div class="messages" id="messages">
-            <!-- Messages go here -->
-        </div>
+        <div class="messages" id="messages"></div>
         <div class="input-bar">
             <input id="msgInput" type="text" placeholder="Message #general" autocomplete="off">
             <button id="sendBtn">Send</button>
@@ -416,10 +410,10 @@
                     <img src="https://yt3.googleusercontent.com/3v1udmdlcCEtP13ti_wDRuS8Mi0X9Fo7Wb17f0ewh2H58nlgof3waSp47u_1mAolRC7XHkNbViM=s72-c-k-c0x00ffffff-no-rj">
                 </div>
                 <div class="avatar-option" data-avatar="pirated">
-                    <img src="https://cdn.discordapp.com/attachments/1472331197865656504/1472335387002273933/Pirated301.png?ex=699232ae&is=6990e12e&hm=8b50f0bdeae7d3050451c2353e676354363f515ace8f9cad6357ed13adffeaf0">
+                    <img src="https://cdn.discordapp.com/attachments/1472331197865656504/1472335387002273933/Pirated301.png">
                 </div>
                 <div class="avatar-option" data-avatar="jullian">
-                    <img src="https://cdn.discordapp.com/attachments/1372285420150460509/1471585740923207793/8803DC9B-AFA7-42A0-BD48-907C906E766F.png?ex=69921b85&is=6990ca05&hm=da34c48e080953396618f7d74d479f3b0afbb5375880a696b2ec63e178d70b26&">
+                    <img src="https://cdn.discordapp.com/attachments/1372285420150460509/1471585740923207793/8803DC9B-AFA7-42A0-BD48-907C906E766F.png">
                 </div>
             </div>
         </div>
@@ -430,246 +424,262 @@
     </div>
 </div>
 
+<!-- FIREBASE SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
 <script>
-    // --- DATA ---
-    const servers = {
-        leon: {
-            id: "leon",
-            name: "Leon's Server",
-            verified: true,
-            banner: "https://yt3.googleusercontent.com/JuZXF0T4vK11D4zcZFw1wKMpaknhUeUfalbVyoEvPq0W5IeW28ry12LRzGA4WK4eRSBGYqMmJQ=w1707-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
-        },
-        pirated: {
-            id: "pirated",
-            name: "Pirated301",
-            verified: false,
-            banner: null
-        },
-        jullian: {
-            id: "jullian",
-            name: "Jullian's Server",
-            verified: false,
-            banner: null
-        }
-    };
+const firebaseConfig = {
+    apiKey: "AIzaSyAhfwEo1oY1oXBlq5lY1Xs4kjB6TEhvB3c",
+    authDomain: "leoncord-1a591.firebaseapp.com",
+    databaseURL: "https://leoncord-1a591-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "leoncord-1a591",
+    storageBucket: "leoncord-1a591.firebasestorage.app",
+    messagingSenderId: "995948089448",
+    appId: "1:995948089448:web:60c256e9e31bac3a882bdd",
+    measurementId: "G-9FL3KNSDR5"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+</script>
 
-    const verifiedIconUrl = "https://cdn-icons-png.flaticon.com/512/6928/6928921.png";
+<script>
+const servers = {
+    leon: {
+        id: "leon",
+        name: "Leon's Server",
+        verified: true,
+        banner: "https://yt3.googleusercontent.com/JuZXF0T4vK11D4zcZFw1wKMpaknhUeUfalbVyoEvPq0W5IeW28ry12LRzGA4WK4eRSBGYqMmJQ=w1707-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
+    },
+    pirated: {
+        id: "pirated",
+        name: "Pirated301",
+        verified: false,
+        banner: null
+    },
+    jullian: {
+        id: "jullian",
+        name: "Jullian's Server",
+        verified: false,
+        banner: null
+    }
+};
 
-    const channels = [
-        { id: "general", name: "General" },
-        { id: "announcements", name: "Announcements" }
-    ];
+const verifiedIconUrl = "https://cdn-icons-png.flaticon.com/512/6928/6928921.png";
 
-    let currentServerId = "leon";
-    let currentChannelId = "general";
+const channels = [
+    { id: "general", name: "General" },
+    { id: "announcements", name: "Announcements" }
+];
 
-    // Temporary profile (not persisted)
-    let profile = {
-        username: "",
-        tags: [],
-        avatarType: "blank", // blank | leon | pirated | jullian
-    };
+let currentServerId = "leon";
+let currentChannelId = "general";
 
-    // In-memory messages: { [serverId_channelId]: [ {username, tags, avatarType, text} ] }
-    const messagesStore = {};
+let profile = {
+    username: "",
+    tags: [],
+    avatarType: "blank",
+};
 
-    // --- UI INIT ---
-    const serverHeaderEl = document.getElementById("serverHeader");
-    const channelListEl = document.getElementById("channelList");
-    const chatHeaderChannelNameEl = document.getElementById("chatChannelName");
-    const messagesEl = document.getElementById("messages");
-    const msgInputEl = document.getElementById("msgInput");
+const serverHeaderEl = document.getElementById("serverHeader");
+const channelListEl = document.getElementById("channelList");
+const chatHeaderChannelNameEl = document.getElementById("chatChannelName");
+const messagesEl = document.getElementById("messages");
+const msgInputEl = document.getElementById("msgInput");
 
-    function renderServerHeader() {
-        const s = servers[currentServerId];
-        let html = "";
+function renderServerHeader() {
+    const s = servers[currentServerId];
+    let html = "";
 
-        if (s.banner) {
-            html += `
-                <div class="server-banner">
-                    <img src="${s.banner}" alt="${s.name} banner">
-                </div>
-            `;
-        }
-
-        html += `<div class="server-title-row">
-                    <div class="server-name">${s.name}</div>
-                    ${s.verified ? `<img class="verified-icon" src="${verifiedIconUrl}" alt="verified">` : ""}
-                 </div>`;
-
-        serverHeaderEl.innerHTML = html;
+    if (s.banner) {
+        html += `
+            <div class="server-banner">
+                <img src="${s.banner}" alt="${s.name} banner">
+            </div>
+        `;
     }
 
-    function renderChannels() {
-        channelListEl.innerHTML = "";
-        channels.forEach(ch => {
-            const div = document.createElement("div");
-            div.className = "channel" + (ch.id === currentChannelId ? " active" : "");
-            div.dataset.channel = ch.id;
-            div.innerHTML = `<span class="hash">#</span> ${ch.name}`;
-            div.addEventListener("click", () => {
-                currentChannelId = ch.id;
-                updateChannelUI();
-            });
-            channelListEl.appendChild(div);
-        });
-    }
+    html += `
+        <div class="server-title-row">
+            <div class="server-name">${s.name}</div>
+            ${s.verified ? `<img class="verified-icon" src="${verifiedIconUrl}" alt="verified">` : ""}
+        </div>
+    `;
 
-    function updateChannelUI() {
-        document.querySelectorAll(".channel").forEach(el => {
-            el.classList.toggle("active", el.dataset.channel === currentChannelId);
-        });
-        chatHeaderChannelNameEl.textContent = currentChannelId === "general" ? "general" : "announcements";
-        msgInputEl.placeholder = "Message #" + (currentChannelId === "general" ? "general" : "announcements");
-        renderMessages();
-    }
+    serverHeaderEl.innerHTML = html;
+}
 
-    function getMessageKey() {
-        return currentServerId + "_" + currentChannelId;
-    }
-
-    function renderMessages() {
-        const key = getMessageKey();
-        const msgs = messagesStore[key] || [];
-        messagesEl.innerHTML = "";
-
-        msgs.forEach(m => {
-            const wrapper = document.createElement("div");
-            wrapper.className = "message";
-
-            const avatarDiv = document.createElement("div");
-            avatarDiv.className = "message-avatar";
-
-            if (m.avatarType === "blank") {
-                avatarDiv.textContent = m.username.charAt(0).toUpperCase();
-            } else {
-                const img = document.createElement("img");
-                img.src = getAvatarUrl(m.avatarType);
-                avatarDiv.appendChild(img);
-            }
-
-            const headerDiv = document.createElement("div");
-            headerDiv.className = "message-header";
-
-            const usernameSpan = document.createElement("span");
-            usernameSpan.className = "message-username";
-            usernameSpan.textContent = m.username;
-
-            const tagsSpan = document.createElement("span");
-            tagsSpan.className = "message-tags";
-            if (m.tags && m.tags.length > 0) {
-                tagsSpan.textContent = "• " + m.tags.join(" | ");
-            }
-
-            headerDiv.appendChild(usernameSpan);
-            if (m.tags && m.tags.length > 0) headerDiv.appendChild(tagsSpan);
-
-            const textDiv = document.createElement("div");
-            textDiv.className = "message-text";
-            textDiv.textContent = m.text;
-
-            const row = document.createElement("div");
-            row.style.display = "flex";
-            row.appendChild(avatarDiv);
-
-            const contentCol = document.createElement("div");
-            contentCol.style.flex = "1";
-            contentCol.appendChild(headerDiv);
-            contentCol.appendChild(textDiv);
-
-            row.appendChild(contentCol);
-            wrapper.appendChild(row);
-            messagesEl.appendChild(wrapper);
-        });
-
-        messagesEl.scrollTop = messagesEl.scrollHeight;
-    }
-
-    function getAvatarUrl(type) {
-        if (type === "leon") {
-            return "https://yt3.googleusercontent.com/3v1udmdlcCEtP13ti_wDRuS8Mi0X9Fo7Wb17f0ewh2H58nlgof3waSp47u_1mAolRC7XHkNbViM=s72-c-k-c0x00ffffff-no-rj";
-        }
-        if (type === "pirated") {
-            return "https://cdn.discordapp.com/attachments/1472331197865656504/1472335387002273933/Pirated301.png?ex=699232ae&is=6990e12e&hm=8b50f0bdeae7d3050451c2353e676354363f515ace8f9cad6357ed13adffeaf0";
-        }
-        if (type === "jullian") {
-            return "https://cdn.discordapp.com/attachments/1372285420150460509/1471585740923207793/8803DC9B-AFA7-42A0-BD48-907C906E766F.png?ex=69921b85&is=6990ca05&hm=da34c48e080953396618f7d74d479f3b0afbb5375880a696b2ec63e178d70b26&";
-        }
-        return "";
-    }
-
-    // --- SERVER SWITCHING ---
-    document.querySelectorAll(".server-icon").forEach(icon => {
-        icon.addEventListener("click", () => {
-            document.querySelectorAll(".server-icon").forEach(i => i.classList.remove("active"));
-            icon.classList.add("active");
-            currentServerId = icon.dataset.server;
-            renderServerHeader();
-            renderChannels();
+function renderChannels() {
+    channelListEl.innerHTML = "";
+    channels.forEach(ch => {
+        const div = document.createElement("div");
+        div.className = "channel" + (ch.id === currentChannelId ? " active" : "");
+        div.dataset.channel = ch.id;
+        div.innerHTML = `<span class="hash">#</span> ${ch.name}`;
+        div.addEventListener("click", () => {
+            currentChannelId = ch.id;
             updateChannelUI();
         });
+        channelListEl.appendChild(div);
     });
+}
 
-    // --- SENDING MESSAGES ---
-    function sendMessage() {
-        const text = msgInputEl.value.trim();
-        if (!text) return;
-        if (!profile.username) return; // should be set
+function getAvatarUrl(type) {
+    if (type === "leon") {
+        return "https://yt3.googleusercontent.com/3v1udmdlcCEtP13ti_wDRuS8Mi0X9Fo7Wb17f0ewh2H58nlgof3waSp47u_1mAolRC7XHkNbViM=s72-c-k-c0x00ffffff-no-rj";
+    }
+    if (type === "pirated") {
+        return "https://cdn.discordapp.com/attachments/1472331197865656504/1472335387002273933/Pirated301.png";
+    }
+    if (type === "jullian") {
+        return "https://cdn.discordapp.com/attachments/1372285420150460509/1471585740923207793/8803DC9B-AFA7-42A0-BD48-907C906E766F.png";
+    }
+    return "";
+}
 
-        const key = getMessageKey();
-        if (!messagesStore[key]) messagesStore[key] = [];
-        messagesStore[key].push({
-            username: profile.username,
-            tags: profile.tags.slice(),
-            avatarType: profile.avatarType,
-            text
-        });
-        msgInputEl.value = "";
-        renderMessages();
+let currentMessagesListenerRef = null;
+
+function listenForMessages() {
+    if (currentMessagesListenerRef) {
+        currentMessagesListenerRef.off();
     }
 
-    document.getElementById("sendBtn").addEventListener("click", sendMessage);
-    msgInputEl.addEventListener("keydown", e => {
-        if (e.key === "Enter") {
-            e.preventDefault();
-            sendMessage();
+    const path = `messages/${currentServerId}/${currentChannelId}`;
+    const ref = db.ref(path);
+    currentMessagesListenerRef = ref;
+
+    messagesEl.innerHTML = "";
+
+    ref.orderByChild("timestamp").on("child_added", snapshot => {
+        const m = snapshot.val();
+        if (!m) return;
+
+        const wrapper = document.createElement("div");
+        wrapper.className = "message";
+
+        const avatarDiv = document.createElement("div");
+        avatarDiv.className = "message-avatar";
+
+        if (m.avatarType === "blank" || !m.avatarType) {
+            avatarDiv.textContent = (m.username || "?").charAt(0).toUpperCase();
+        } else {
+            const img = document.createElement("img");
+            img.src = getAvatarUrl(m.avatarType);
+            avatarDiv.appendChild(img);
         }
+
+        const headerDiv = document.createElement("div");
+        headerDiv.className = "message-header";
+
+        const usernameSpan = document.createElement("span");
+        usernameSpan.className = "message-username";
+        usernameSpan.textContent = m.username || "Unknown";
+
+        const tagsSpan = document.createElement("span");
+        tagsSpan.className = "message-tags";
+        if (m.tags && m.tags.length > 0) {
+            tagsSpan.textContent = "• " + m.tags.join(" | ");
+        }
+
+        headerDiv.appendChild(usernameSpan);
+        if (m.tags && m.tags.length > 0) headerDiv.appendChild(tagsSpan);
+
+        const textDiv = document.createElement("div");
+        textDiv.className = "message-text";
+        textDiv.textContent = m.text || "";
+
+        const row = document.createElement("div");
+        row.style.display = "flex";
+        row.appendChild(avatarDiv);
+
+        const contentCol = document.createElement("div");
+        contentCol.style.flex = "1";
+        contentCol.appendChild(headerDiv);
+        contentCol.appendChild(textDiv);
+
+        row.appendChild(contentCol);
+        wrapper.appendChild(row);
+        messagesEl.appendChild(wrapper);
+
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+    });
+}
+
+function updateChannelUI() {
+    document.querySelectorAll(".channel").forEach(el => {
+        el.classList.toggle("active", el.dataset.channel === currentChannelId);
+    });
+    chatHeaderChannelNameEl.textContent = currentChannelId;
+    msgInputEl.placeholder = "Message #" + currentChannelId;
+    listenForMessages();
+}
+
+document.querySelectorAll(".server-icon").forEach(icon => {
+    icon.addEventListener("click", () => {
+        document.querySelectorAll(".server-icon").forEach(i => i.classList.remove("active"));
+        icon.classList.add("active");
+        currentServerId = icon.dataset.server;
+        renderServerHeader();
+        renderChannels();
+        updateChannelUI();
+    });
+});
+
+function sendMessage() {
+    const text = msgInputEl.value.trim();
+    if (!text) return;
+    if (!profile.username) return;
+
+    const path = `messages/${currentServerId}/${currentChannelId}`;
+    db.ref(path).push({
+        username: profile.username,
+        tags: profile.tags.slice(),
+        avatarType: profile.avatarType,
+        text: text,
+        timestamp: Date.now()
     });
 
-    // --- PROFILE OVERLAY LOGIC ---
-    const overlayEl = document.getElementById("profileOverlay");
-    const usernameInputEl = document.getElementById("usernameInput");
-    const profileContinueBtn = document.getElementById("profileContinue");
+    msgInputEl.value = "";
+}
 
-    // avatar selection
-    document.getElementById("avatarOptions").addEventListener("click", e => {
-        const option = e.target.closest(".avatar-option");
-        if (!option) return;
-        document.querySelectorAll(".avatar-option").forEach(o => o.classList.remove("selected"));
-        option.classList.add("selected");
-        profile.avatarType = option.dataset.avatar;
+document.getElementById("sendBtn").addEventListener("click", sendMessage);
+msgInputEl.addEventListener("keydown", e => {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        sendMessage();
+    }
+});
+
+const overlayEl = document.getElementById("profileOverlay");
+const usernameInputEl = document.getElementById("usernameInput");
+const profileContinueBtn = document.getElementById("profileContinue");
+
+document.getElementById("avatarOptions").addEventListener("click", e => {
+    const option = e.target.closest(".avatar-option");
+    if (!option) return;
+    document.querySelectorAll(".avatar-option").forEach(o => o.classList.remove("selected"));
+    option.classList.add("selected");
+    profile.avatarType = option.dataset.avatar;
+});
+
+profileContinueBtn.addEventListener("click", () => {
+    const username = usernameInputEl.value.trim();
+    if (!username) return;
+
+    const tags = [];
+    document.querySelectorAll(".tag-checkbox").forEach(cb => {
+        if (cb.checked) tags.push(cb.value);
     });
 
-    profileContinueBtn.addEventListener("click", () => {
-        const username = usernameInputEl.value.trim();
-        if (!username) return;
+    profile.username = username;
+    profile.tags = tags;
 
-        const tags = [];
-        document.querySelectorAll(".tag-checkbox").forEach(cb => {
-            if (cb.checked) tags.push(cb.value);
-        });
+    overlayEl.style.display = "none";
+    usernameInputEl.value = "";
+});
 
-        profile.username = username;
-        profile.tags = tags;
-
-        overlayEl.style.display = "none";
-        usernameInputEl.value = "";
-    });
-
-    // --- INITIAL RENDER ---
-    renderServerHeader();
-    renderChannels();
-    updateChannelUI();
+renderServerHeader();
+renderChannels();
+updateChannelUI();
 </script>
 </body>
 </html>
